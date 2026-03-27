@@ -46,12 +46,7 @@
       "openingHoursSpecification": {
         "@type": "OpeningHoursSpecification",
         "dayOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday"
+          "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
         ],
         "opens": "08:00",
         "closes": "20:00"
@@ -93,10 +88,8 @@
         "@type": "Question",
         "name": "Apakah bisa request menu khusus (Custom Menu)?",
         "acceptedAnswer": {
-          "@type": {
-            "@type": "Answer",
-            "text": "Sangat bisa! Kami menerima penyesuaian menu baik untuk masakan Betawi, Jawa, Sunda, maupun Padang sesuai dengan selera dan kebutuhan budget Anda."
-          }
+          "@type": "Answer",
+          "text": "Sangat bisa! Kami menerima penyesuaian menu baik untuk masakan Betawi, Jawa, Sunda, maupun Padang sesuai dengan selera dan kebutuhan budget Anda."
         }
       }]
     }
@@ -110,10 +103,13 @@
 </head>
 <body>
 
-    <!-- WhatsApp Floating Button -->
+    <!-- Floating Buttons -->
     <a href="https://wa.me/6281381228890?text=Halo%20Dapoer%20Niknik,%20saya%20ingin%20memesan%20catering" class="wa-float" target="_blank" aria-label="Order via WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
+    <button id="scrollToTop" class="scroll-top-btn" aria-label="Scroll to Top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <!-- Navigation -->
     <nav id="navbar">
@@ -122,45 +118,77 @@
                 <i class="fas fa-utensils"></i>
                 Dapoer <span>Niknik</span>
             </a>
-            <ul class="nav-links">
-                <li><a href="#hero">Beranda</a></li>
-                <li><a href="#menu">Menu</a></li>
-                <li><a href="#why-us">Keunggulan</a></li>
-                <li><a href="#about">Tentang Kami</a></li>
-                <li><a href="#contact">Kontak</a></li>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#hero" onclick="closeMenu()">Beranda</a></li>
+                <li><a href="#menu" onclick="closeMenu()">Menu</a></li>
+                <li><a href="#layanan-acara" onclick="closeMenu()">Layanan</a></li>
+                <li><a href="#about" onclick="closeMenu()">Tentang Kami</a></li>
+                <li><a href="#contact" onclick="closeMenu()">Kontak</a></li>
             </ul>
-            <a href="https://wa.me/6281381228890" class="btn btn-primary nav-cta">Pesan Sekarang</a>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <a href="https://wa.me/6281381228890" class="btn btn-primary nav-cta">Pesan Sekarang</a>
+                <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero" id="hero">
-        <div class="container">
+        <div class="container hero-grid">
             <div class="hero-content">
-                <div class="hero-badge">Catering Terpercaya di Jakarta</div>
-                <h1>Kelezatan <span>Nusantara</span> di Setiap Hidangan</h1>
-                <p class="hero-tagline">#RASANYANGANGENIN</p>
+                <div class="hero-badge">🍽️ Catering Terpercaya di Jakarta</div>
+                <h1>Kelezatan <span>Nusantara</span> <br>di Setiap Hidangan</h1>
+                <p class="hero-tagline" style="color: var(--primary);">#RASANYANGANGENIN</p>
                 <p>Menghadirkan cita rasa otentik dengan bahan pilihan terbaik. Siap melayani nasi kotak, prasmanan, hingga tumpeng modern untuk momen spesial Anda.</p>
                 <div class="hero-btns">
-                    <a href="#menu" class="btn btn-primary">Lihat Menu</a>
-                    <a href="#contact" class="btn btn-outline">Konsultasi Gratis</a>
+                    <a href="#menu" class="btn btn-primary"><i class="fas fa-book-open"></i> Lihat Menu</a>
+                    <a href="#contact" class="btn btn-outline"><i class="fas fa-comments"></i> Hubungi Kami</a>
                 </div>
+            </div>
+            <div class="hero-image">
+                <img src="assets/images/hero_food.png" alt="Hidangan Nusantara Dapoer Niknik" />
             </div>
         </div>
     </section>
 
+    <!-- Scroll Strip / Marquee -->
+    <div class="scroll-strip">
+        <div class="scroll-strip-inner">
+            <span>Nasi Box Premium</span>
+            <span>Prasmanan Event</span>
+            <span>Tumpeng Modern</span>
+            <span>Masakan Betawi</span>
+            <span>Masakan Sunda</span>
+            <span>Masakan Jawa</span>
+            <span>Masakan Padang</span>
+            <span>100% Halal</span>
+            <span>Nasi Box Premium</span>
+            <span>Prasmanan Event</span>
+            <span>Tumpeng Modern</span>
+            <span>Masakan Betawi</span>
+            <span>Masakan Sunda</span>
+            <span>Masakan Jawa</span>
+            <span>Masakan Padang</span>
+            <span>100% Halal</span>
+        </div>
+    </div>
+
     <!-- Unified Menu Section (Tabbed) -->
     <section id="menu">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header reveal">
                 <h2>Menu Dapoer Niknik</h2>
                 <p>Pilih kategori hidangan favorit Anda. Kami siap melayani dengan rasa yang autentik.</p>
             </div>
 
             <!-- Tab Buttons -->
-            <div class="menu-tabs">
+            <div class="menu-tabs reveal">
                 <button class="tab-btn active" onclick="openTab(event, 'rames')">Nasi Rames</button>
-                <button class="tab-btn " onclick="openTab(event, 'alacarte')">Menu Satuan</button>
+                <button class="tab-btn" onclick="openTab(event, 'alacarte')">Menu Satuan</button>
                 <button class="tab-btn" onclick="openTab(event, 'snack')">Minuman & Snack</button>
                 <button class="tab-btn" onclick="openTab(event, 'paket')">Paket & Box</button>
             </div>
@@ -168,34 +196,31 @@
             <!-- Tab 1: Paket & Box -->
             <div id="paket" class="tab-content">
                 <div class="menu-carousel">
-                    <!-- Carousel Item 1 -->
                     <div class="menu-card">
-                        <div class="menu-img"><img src="assets/images/menu1.png" alt="Nasi Box Premium Jakarta - Paket Nasi Kotak Higienis"></div>
+                        <div class="menu-img"><img src="assets/images/menu1.png" alt="Nasi Box Premium Jakarta - Paket Nasi Kotak Higienis" loading="lazy"></div>
                         <div class="menu-info">
                             <span class="menu-price">Mulai Rp 25.000</span>
                             <h3>Nasi Box Premium</h3>
                             <p>Paket nasi lengkap higienis untuk rapat & syukuran.</p>
-                            <br><a href="https://wa.me/6281381228890?text=Halo%20Dapoer%20Niknik,%20saya%20ingin%20pesan%20Nasi%20Box%20Premium" class="btn btn-outline" style="width: 100%; text-align: center; display: block;">Pesan Sekarang</a>
+                            <a href="https://wa.me/6281381228890?text=Halo%20Dapoer%20Niknik,%20saya%20ingin%20pesan%20Nasi%20Box%20Premium" class="btn btn-outline" style="width: 100%; text-align: center;">Pesan Sekarang</a>
                         </div>
                     </div>
-                    <!-- Carousel Item 2 -->
                     <div class="menu-card">
-                        <div class="menu-img"><img src="assets/images/menu2.png" alt="Layanan Prasmanan Jakarta untuk Acara Kantor dan Wedding"></div>
+                        <div class="menu-img"><img src="assets/images/menu2.png" alt="Layanan Prasmanan Jakarta untuk Acara Kantor dan Wedding" loading="lazy"></div>
                         <div class="menu-info">
                             <span class="menu-price">Mulai Rp 45.000/pax</span>
                             <h3>Prasmanan Event</h3>
                             <p>Layanan prasmanan lengkap untuk wedding & gathering.</p>
-                            <br><a href="https://wa.me/6281381228890?text=Halo%20Dapoer%20Niknik,%20saya%20ingin%20pesan%20Prasmanan%20Event" class="btn btn-outline" style="width: 100%; text-align: center; display: block;">Pesan Sekarang</a>
+                            <a href="https://wa.me/6281381228890?text=Halo%20Dapoer%20Niknik,%20saya%20ingin%20pesan%20Prasmanan%20Event" class="btn btn-outline" style="width: 100%; text-align: center;">Pesan Sekarang</a>
                         </div>
                     </div>
-                    <!-- Carousel Item 3 -->
                     <div class="menu-card">
-                        <div class="menu-img"><img src="assets/images/menu3.png" alt="Tumpeng Modern Jakarta - Nasi Tumpeng Kuning Komplit"></div>
+                        <div class="menu-img"><img src="assets/images/menu3.png" alt="Tumpeng Modern Jakarta - Nasi Tumpeng Kuning Komplit" loading="lazy"></div>
                         <div class="menu-info">
                             <span class="menu-price">Mulai Rp 350.000</span>
                             <h3>Tumpeng Modern</h3>
                             <p>Nasi tumpeng estetik untuk momen spesial Anda.</p>
-                            <br><a href="https://wa.me/6281381228890?text=Halo%20Dapoer%20Niknik,%20saya%20ingin%20pesan%20Tumpeng%20Modern" class="btn btn-outline" style="width: 100%; text-align: center; display: block;">Pesan Sekarang</a>
+                            <a href="https://wa.me/6281381228890?text=Halo%20Dapoer%20Niknik,%20saya%20ingin%20pesan%20Tumpeng%20Modern" class="btn btn-outline" style="width: 100%; text-align: center;">Pesan Sekarang</a>
                         </div>
                     </div>
                 </div>
@@ -204,84 +229,76 @@
             <!-- Tab 2: Ala Carte -->
             <div id="alacarte" class="tab-content">
                 <div class="menu-carousel">
-                    <!-- Soto Betawi -->
                     <div class="menu-card">
-                        <div class="menu-img"><img src="assets/images/soto_betawi.png" alt="Soto Betawi"></div>
+                        <div class="menu-img"><img src="assets/images/soto_betawi.png" alt="Soto Betawi" loading="lazy"></div>
                         <div class="menu-info">
                             <span class="menu-price">Rp 25.000</span>
                             <h3>Soto Betawi + Nasi</h3>
                             <p>Kuah santan gurih melimpah dengan potongan daging empuk dan sambal khas Betawi.</p>
-                            <br><a href="https://wa.me/6281381228890?text=Halo%20Dapoer%20Niknik,%20saya%20ingin%20pesan%20Soto%20Betawi%20+%20Nasi" class="btn btn-outline" style="width: 100%; text-align: center; display: block;">Pesan Sekarang</a>
+                            <a href="https://wa.me/6281381228890?text=Halo%20Dapoer%20Niknik,%20saya%20ingin%20pesan%20Soto%20Betawi%20+%20Nasi" class="btn btn-outline" style="width: 100%; text-align: center;">Pesan Sekarang</a>
                         </div>
                     </div>
-                    <!-- Mie Kangkung -->
                     <div class="menu-card">
-                        <div class="menu-img"><img src="assets/images/mie_kangkung.png" alt="Mie Kangkung"></div>
+                        <div class="menu-img"><img src="assets/images/mie_kangkung.png" alt="Mie Kangkung" loading="lazy"></div>
                         <div class="menu-info">
                             <span class="menu-price">Rp 20.000</span>
                             <h3>Mie Kangkung Bakso</h3>
                             <p>Paduan mie kenyal, kangkung segar, dan bakso kenyal dalam kuah kental gurih manis.</p>
-                            <br><a href="https://wa.me/6281381228890?text=Halo%20Dapoer%20Niknik,%20saya%20ingin%20pesan%20Mie%20Kangkung%20Bakso" class="btn btn-outline" style="width: 100%; text-align: center; display: block;">Pesan Sekarang</a>
+                            <a href="https://wa.me/6281381228890?text=Halo%20Dapoer%20Niknik,%20saya%20ingin%20pesan%20Mie%20Kangkung%20Bakso" class="btn btn-outline" style="width: 100%; text-align: center;">Pesan Sekarang</a>
                         </div>
                     </div>
-                    <!-- Ayam Bawang -->
                     <div class="menu-card">
-                        <div class="menu-img"><img src="assets/images/ayam_bawang.png" alt="Ayam Bawang"></div>
+                        <div class="menu-img"><img src="assets/images/ayam_bawang.png" alt="Ayam Bawang" loading="lazy"></div>
                         <div class="menu-info">
                             <span class="menu-price">Rp 22.000</span>
                             <h3>Ayam Bawang Putih + Nasi</h3>
                             <p>Ayam rempah dengan aroma bawang putih menggoda, gurih meresap hingga ke tulang.</p>
-                            <br><a href="https://wa.me/6281381228890?text=Halo%20Dapoer%20Niknik,%20saya%20ingin%20pesan%20Ayam%20Bawang%20Putih%20+%20Nasi" class="btn btn-outline" style="width: 100%; text-align: center; display: block;">Pesan Sekarang</a>
+                            <a href="https://wa.me/6281381228890?text=Halo%20Dapoer%20Niknik,%20saya%20ingin%20pesan%20Ayam%20Bawang%20Putih%20+%20Nasi" class="btn btn-outline" style="width: 100%; text-align: center;">Pesan Sekarang</a>
                         </div>
                     </div>
-                    <!-- Daging Mercon -->
                     <div class="menu-card">
-                        <div class="menu-img"><img src="assets/images/daging_mercon.png" alt="Daging Mercon"></div>
+                        <div class="menu-img"><img src="assets/images/daging_mercon.png" alt="Daging Mercon" loading="lazy"></div>
                         <div class="menu-info">
                             <span class="menu-price">Rp 25.000</span>
                             <h3>Daging Mercon + Nasi</h3>
                             <p>Sensasi pedas meledak dengan potongan daging sapi pilihan, favorit pecinta pedas sejati.</p>
-                            <br><a href="https://wa.me/6281381228890?text=Halo%20Dapoer%20Niknik,%20saya%20ingin%20pesan%20Daging%20Mercon%20+%20Nasi" class="btn btn-outline" style="width: 100%; text-align: center; display: block;">Pesan Sekarang</a>
+                            <a href="https://wa.me/6281381228890?text=Halo%20Dapoer%20Niknik,%20saya%20ingin%20pesan%20Daging%20Mercon%20+%20Nasi" class="btn btn-outline" style="width: 100%; text-align: center;">Pesan Sekarang</a>
                         </div>
                     </div>
-                    <!-- Empal Gentong -->
                     <div class="menu-card">
-                        <div class="menu-img"><img src="assets/images/empal_gentong.png" alt="Empal Gentong"></div>
+                        <div class="menu-img"><img src="assets/images/empal_gentong.png" alt="Empal Gentong" loading="lazy"></div>
                         <div class="menu-info">
                             <span class="menu-price">Rp 25.000</span>
                             <h3>Empal Gentong + Nasi</h3>
                             <p>Sajian khas Cirebon dengan kuah kuning rempah kaya rasa dan daging sapi lembut.</p>
-                            <br><a href="https://wa.me/6281381228890?text=Halo%20Dapoer%20Niknik,%20saya%20ingin%20pesan%20Empal%20Gentong%20+%20Nasi" class="btn btn-outline" style="width: 100%; text-align: center; display: block;">Pesan Sekarang</a>
+                            <a href="https://wa.me/6281381228890?text=Halo%20Dapoer%20Niknik,%20saya%20ingin%20pesan%20Empal%20Gentong%20+%20Nasi" class="btn btn-outline" style="width: 100%; text-align: center;">Pesan Sekarang</a>
                         </div>
                     </div>
-                    <!-- Soto Sokaraja -->
                     <div class="menu-card">
-                        <div class="menu-img"><img src="assets/images/soto_sokaraja.png" alt="Soto Sokaraja"></div>
+                        <div class="menu-img"><img src="assets/images/soto_sokaraja.png" alt="Soto Sokaraja" loading="lazy"></div>
                         <div class="menu-info">
                             <span class="menu-price">Rp 22.000</span>
                             <h3>Soto Sokaraja</h3>
                             <p>Keunikan soto dengan bumbu kacang dan kerupuk cantir, memberikan tekstur rasa autentik.</p>
-                            <br><a href="https://wa.me/6281381228890?text=Halo%20Dapoer%20Niknik,%20saya%20ingin%20pesan%20Soto%20Sokaraja" class="btn btn-outline" style="width: 100%; text-align: center; display: block;">Pesan Sekarang</a>
+                            <a href="https://wa.me/6281381228890?text=Halo%20Dapoer%20Niknik,%20saya%20ingin%20pesan%20Soto%20Sokaraja" class="btn btn-outline" style="width: 100%; text-align: center;">Pesan Sekarang</a>
                         </div>
                     </div>
-                    <!-- Dendeng Batoko -->
                     <div class="menu-card">
-                        <div class="menu-img"><img src="assets/images/dendeng_batoko.png" alt="Dendeng Batoko"></div>
+                        <div class="menu-img"><img src="assets/images/dendeng_batoko.png" alt="Dendeng Batoko" loading="lazy"></div>
                         <div class="menu-info">
                             <span class="menu-price">Rp 25.000</span>
                             <h3>Dendeng Batoko + Nasi</h3>
                             <p>Daging sapi tipis renyah dengan siraman sambal cabe merah segar dan pedas mantap.</p>
-                            <br><a href="https://wa.me/6281381228890?text=Halo%20Dapoer%20Niknik,%20saya%20ingin%20pesan%20Dendeng%20Batoko%20+%20Nasi" class="btn btn-outline" style="width: 100%; text-align: center; display: block;">Pesan Sekarang</a>
+                            <a href="https://wa.me/6281381228890?text=Halo%20Dapoer%20Niknik,%20saya%20ingin%20pesan%20Dendeng%20Batoko%20+%20Nasi" class="btn btn-outline" style="width: 100%; text-align: center;">Pesan Sekarang</a>
                         </div>
                     </div>
-                    <!-- Nasi Kuning -->
                     <div class="menu-card">
-                        <div class="menu-img"><img src="assets/images/nasi_kuning.png" alt="Nasi Kuning"></div>
+                        <div class="menu-img"><img src="assets/images/nasi_kuning.png" alt="Nasi Kuning" loading="lazy"></div>
                         <div class="menu-info">
                             <span class="menu-price">Rp 25.000</span>
                             <h3>Nasi Kuning Ayam Komplit</h3>
                             <p>Nasi kuning wangi rempah disajikan dengan ayam goreng, telur suwir, dan perkedel lezat.</p>
-                            <br><a href="https://wa.me/6281381228890?text=Halo%20Dapoer%20Niknik,%20saya%20ingin%20pesan%20Nasi%20Kuning%20Ayam%20Komplit" class="btn btn-outline" style="width: 100%; text-align: center; display: block;">Pesan Sekarang</a>
+                            <a href="https://wa.me/6281381228890?text=Halo%20Dapoer%20Niknik,%20saya%20ingin%20pesan%20Nasi%20Kuning%20Ayam%20Komplit" class="btn btn-outline" style="width: 100%; text-align: center;">Pesan Sekarang</a>
                         </div>
                     </div>
                 </div>
@@ -290,44 +307,40 @@
             <!-- Tab 3: Nasi Rames -->
             <div id="rames" class="tab-content active">
                 <div class="menu-carousel">
-                    <!-- Rames Telur -->
                     <div class="menu-card">
-                        <div class="menu-img"><img src="assets/images/nasi_rames_telur.png" alt="Rames Telur"></div>
+                        <div class="menu-img"><img src="assets/images/nasi_rames_telur.png" alt="Rames Telur" loading="lazy"></div>
                         <div class="menu-info">
                             <span class="menu-price">Rp 17.000</span>
                             <h3>Nasi Rames Telur + Sayur</h3>
                             <p>Pilihan hemat dan nikmat dengan nasi putih, telur, dan aneka sayuran segar bumbu desa.</p>
-                            <br><a href="https://wa.me/6281381228890?text=Halo%20Dapoer%20Niknik,%20saya%20ingin%20pesan%20Nasi%20Rames%20Telur%20+%20Sayur" class="btn btn-outline" style="width: 100%; text-align: center; display: block;">Pesan Sekarang</a>
+                            <a href="https://wa.me/6281381228890?text=Halo%20Dapoer%20Niknik,%20saya%20ingin%20pesan%20Nasi%20Rames%20Telur%20+%20Sayur" class="btn btn-outline" style="width: 100%; text-align: center;">Pesan Sekarang</a>
                         </div>
                     </div>
-                    <!-- Rames Ayam -->
                     <div class="menu-card">
-                        <div class="menu-img"><img src="assets/images/nasi_rames_ayam.png" alt="Rames Ayam"></div>
+                        <div class="menu-img"><img src="assets/images/nasi_rames_ayam.png" alt="Rames Ayam" loading="lazy"></div>
                         <div class="menu-info">
                             <span class="menu-price">Rp 20.000</span>
                             <h3>Nasi Rames Ayam/Ikan + Sayur</h3>
                             <p>Porsi mantap dengan pilihan lauk ayam goreng atau ikan ditemani sayuran favorit.</p>
-                            <br><a href="https://wa.me/6281381228890?text=Halo%20Dapoer%20Niknik,%20saya%20ingin%20pesan%20Nasi%20Rames%20Ayam/Ikan%20+%20Sayur" class="btn btn-outline" style="width: 100%; text-align: center; display: block;">Pesan Sekarang</a>
+                            <a href="https://wa.me/6281381228890?text=Halo%20Dapoer%20Niknik,%20saya%20ingin%20pesan%20Nasi%20Rames%20Ayam/Ikan%20+%20Sayur" class="btn btn-outline" style="width: 100%; text-align: center;">Pesan Sekarang</a>
                         </div>
                     </div>
-                    <!-- Rames Daging -->
                     <div class="menu-card">
-                        <div class="menu-img"><img src="assets/images/nasi_rames_daging.png" alt="Rames Daging"></div>
+                        <div class="menu-img"><img src="assets/images/nasi_rames_daging.png" alt="Rames Daging" loading="lazy"></div>
                         <div class="menu-info">
                             <span class="menu-price">Rp 25.000</span>
                             <h3>Nasi Rames Daging + Sayur</h3>
                             <p>Sajian premium rames dengan potongan daging sapi berbumbu meresap dan sayuran pelengkap.</p>
-                            <br><a href="https://wa.me/6281381228890?text=Halo%20Dapoer%20Niknik,%20saya%20ingin%20pesan%20Nasi%20Rames%20Daging%20+%20Sayur" class="btn btn-outline" style="width: 100%; text-align: center; display: block;">Pesan Sekarang</a>
+                            <a href="https://wa.me/6281381228890?text=Halo%20Dapoer%20Niknik,%20saya%20ingin%20pesan%20Nasi%20Rames%20Daging%20+%20Sayur" class="btn btn-outline" style="width: 100%; text-align: center;">Pesan Sekarang</a>
                         </div>
                     </div>
-                    <!-- Asinan -->
                     <div class="menu-card">
-                        <div class="menu-img"><img src="assets/images/asinan.png" alt="Asinan"></div>
+                        <div class="menu-img"><img src="assets/images/asinan.png" alt="Asinan" loading="lazy"></div>
                         <div class="menu-info">
                             <span class="menu-price">Pesanan Khusus</span>
                             <h3>Asinan Segar</h3>
                             <p>Kombinasi sayuran dan buah segar dengan kuah cuka pedas manis yang segar di lidah.</p>
-                            <br><a href="https://wa.me/6281381228890?text=Halo%20Dapoer%20Niknik,%20saya%20ingin%20pesan%20Asinan%20Segar" class="btn btn-outline" style="width: 100%; text-align: center; display: block;">Pesan Sekarang</a>
+                            <a href="https://wa.me/6281381228890?text=Halo%20Dapoer%20Niknik,%20saya%20ingin%20pesan%20Asinan%20Segar" class="btn btn-outline" style="width: 100%; text-align: center;">Pesan Sekarang</a>
                         </div>
                     </div>
                 </div>
@@ -336,40 +349,40 @@
             <!-- Tab 4: Snack & Drink -->
             <div id="snack" class="tab-content">
                 <div class="menu-carousel">
-                    <!-- Lemon Sereh -->
                     <div class="menu-card">
+                        <div class="menu-img"><img src="assets/images/lemon_sereh.png" alt="Lemon Sereh Selasih" loading="lazy"></div>
                         <div class="menu-info">
                             <span class="menu-price">Rp 8.000</span>
                             <h3>Lemon Sereh Selasih</h3>
                             <p>Minuman sehat penyegar dahaga dengan aroma sereh menenangkan dan butiran selasih.</p>
-                            <br><a href="https://wa.me/6281381228890?text=Halo%20Dapoer%20Niknik,%20saya%20ingin%20pesan%20Lemon%20Sereh%20Selasih" class="btn btn-outline" style="width: 100%; text-align: center; display: block;">Pesan Sekarang</a>
+                            <a href="https://wa.me/6281381228890?text=Halo%20Dapoer%20Niknik,%20saya%20ingin%20pesan%20Lemon%20Sereh%20Selasih" class="btn btn-outline" style="width: 100%; text-align: center;">Pesan Sekarang</a>
                         </div>
                     </div>
-                    <!-- Es Teh -->
                     <div class="menu-card">
+                        <div class="menu-img"><img src="assets/images/es_teh_manis.png" alt="Es Teh Manis" loading="lazy"></div>
                         <div class="menu-info">
                             <span class="menu-price">Rp 5.000</span>
                             <h3>Es Teh Manis</h3>
                             <p>Kesegaran teh pilihan yang diseduh sempurna dengan rasa manis yang pas.</p>
-                            <br><a href="https://wa.me/6281381228890?text=Halo%20Dapoer%20Niknik,%20saya%20ingin%20pesan%20Es%20Teh%20Manis" class="btn btn-outline" style="width: 100%; text-align: center; display: block;">Pesan Sekarang</a>
+                            <a href="https://wa.me/6281381228890?text=Halo%20Dapoer%20Niknik,%20saya%20ingin%20pesan%20Es%20Teh%20Manis" class="btn btn-outline" style="width: 100%; text-align: center;">Pesan Sekarang</a>
                         </div>
                     </div>
-                    <!-- Air Mineral -->
                     <div class="menu-card">
+                        <div class="menu-img"><img src="assets/images/air_mineral.png" alt="Air Mineral" loading="lazy"></div>
                         <div class="menu-info">
                             <span class="menu-price">Rp 5.000</span>
                             <h3>Air Mineral</h3>
                             <p>Air mineral kemasan untuk menemani santapan lezat Anda.</p>
-                            <br><a href="https://wa.me/6281381228890?text=Halo%20Dapoer%20Niknik,%20saya%20ingin%20pesan%20Air%20Mineral" class="btn btn-outline" style="width: 100%; text-align: center; display: block;">Pesan Sekarang</a>
+                            <a href="https://wa.me/6281381228890?text=Halo%20Dapoer%20Niknik,%20saya%20ingin%20pesan%20Air%20Mineral" class="btn btn-outline" style="width: 100%; text-align: center;">Pesan Sekarang</a>
                         </div>
                     </div>
-                    <!-- Mendoan -->
                     <div class="menu-card">
+                        <div class="menu-img"><img src="assets/images/mendoan.png" alt="Mendoan & Gorengan" loading="lazy"></div>
                         <div class="menu-info">
                             <span class="menu-price">Mulai Rp 2.000</span>
                             <h3>Mendoan & Aneka Gorengan</h3>
                             <p>Tempe mendoan hangat khas Cilacap yang lembut, teman setia makan soto.</p>
-                            <br><a href="https://wa.me/6281381228890?text=Halo%20Dapoer%20Niknik,%20saya%20ingin%20pesan%20Mendoan%20&%20Aneka%20Gorengan" class="btn btn-outline" style="width: 100%; text-align: center; display: block;">Pesan Sekarang</a>
+                            <a href="https://wa.me/6281381228890?text=Halo%20Dapoer%20Niknik,%20saya%20ingin%20pesan%20Mendoan%20%26%20Aneka%20Gorengan" class="btn btn-outline" style="width: 100%; text-align: center;">Pesan Sekarang</a>
                         </div>
                     </div>
                 </div>
@@ -380,32 +393,35 @@
     <!-- Why Us Section -->
     <section class="why-us" id="why-us">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header reveal">
                 <h2>Mengapa Memilih Kami?</h2>
-                <p>Kami dedikasikan yang terbaik untuk kepuasan pelanggan melalui 3 pilar utama kami.</p>
+                <p>Ribuan pelanggan sudah mempercayakan momen spesial mereka kepada Dapoer Niknik.</p>
             </div>
             
-            <div class="features-grid">
+            <div class="features-grid stagger-children">
                 <div class="feature-item">
+                    <div class="feature-stat">5000+</div>
                     <div class="feature-icon">
                         <i class="fas fa-leaf"></i>
                     </div>
-                    <h3>Bahan Segar</h3>
-                    <p>Hanya menggunakan bahan baku pilihan yang dibeli setiap hari untuk menjaga kualitas rasa.</p>
+                    <h3>Porsi Tersaji</h3>
+                    <p>Bahan baku segar pilihan yang dibeli setiap hari, diolah menjadi ribuan porsi berkualitas.</p>
                 </div>
                 <div class="feature-item">
+                    <div class="feature-stat">100%</div>
                     <div class="feature-icon">
                         <i class="fas fa-check-circle"></i>
                     </div>
-                    <h3>100% Halal</h3>
-                    <p>Seluruh proses pengolahan dilakukan secara bersih sesuai standar kebersihan dan kehalalan.</p>
+                    <h3>Halal & Higienis</h3>
+                    <p>Seluruh proses dari bahan baku hingga penyajian mengikuti standar kebersihan dan kehalalan.</p>
                 </div>
                 <div class="feature-item">
+                    <div class="feature-stat">99%</div>
                     <div class="feature-icon">
                         <i class="fas fa-shipping-fast"></i>
                     </div>
                     <h3>Tepat Waktu</h3>
-                    <p>Pengantaran pesanan dijamin tepat waktu sampai ke lokasi Anda dengan armada khusus.</p>
+                    <p>Pengantaran dijamin on-time sampai ke lokasi acara Anda dengan armada khusus kami.</p>
                 </div>
             </div>
         </div>
@@ -413,57 +429,185 @@
 
     <!-- About Section -->
     <section id="about">
-        <div class="container" style="display: flex; align-items: center; gap: 4rem; flex-wrap: wrap;">
-            <div style="flex: 1; min-width: 300px;">
-                <img src="assets/images/menu2.png" alt="Dapoer Niknik Catering Jakarta - Team Masakan Nusantara" style="border-radius: 30px; box-shadow: var(--shadow);">
+        <div class="container">
+            <div class="reveal" style="flex: 1; min-width: 300px;">
+                <img src="assets/images/menu2.png" alt="Dapoer Niknik Catering Jakarta - Team Masakan Nusantara">
             </div>
-            <div style="flex: 1; min-width: 300px;">
-                <div class="hero-badge">Sejarah Kami</div>
-                <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Keahlian Kuliner Nusantara dalam Satu Atap</h2>
-                <p style="color: var(--gray); margin-bottom: 2rem;">Dapoer Niknik lahir dari kecintaan kami terhadap kekayaan kuliner Indonesia. Kami spesialis dalam menyajikan hidangan autentik mulai dari <strong>Masakan Betawi, Sunda, Jawa, hingga Padang</strong>.</p>
-                <p style="color: var(--gray); margin-bottom: 2rem;">Berlokasi di Jakarta, kami siap melayani pesanan <strong>Nasi Box, Nasi Kuning, hingga Tumpeng Komplit</strong> untuk berbagai kebutuhan acara kantor, syukuran, atau harian Anda.</p>
-                <ul style="margin-bottom: 2rem;">
-                    <li style="margin-bottom: 0.8rem;"><i class="fas fa-check" style="color: var(--primary); margin-right: 0.5rem;"></i> Spesialis Masakan Betawi, Sunda, Jawa & Padang</li>
-                    <li style="margin-bottom: 0.8rem;"><i class="fas fa-check" style="color: var(--primary); margin-right: 0.5rem;"></i> Pesanan Nasi Box & Tumpeng Komplit</li>
-                    <li style="margin-bottom: 0.8rem;"><i class="fas fa-check" style="color: var(--primary); margin-right: 0.5rem;"></i> Higienis & Halal Terjamin</li>
+            <div class="reveal" style="flex: 1; min-width: 300px;">
+                <div class="hero-badge">🌶️ Sejarah Kami</div>
+                <h2>Keahlian Kuliner Nusantara dalam Satu Atap</h2>
+                <p>Dapoer Niknik lahir dari kecintaan kami terhadap kekayaan kuliner Indonesia. Kami spesialis dalam menyajikan hidangan autentik mulai dari <strong>Masakan Betawi, Sunda, Jawa, hingga Padang</strong>.</p>
+                <p>Berlokasi di Jakarta, kami siap melayani pesanan <strong>Nasi Box, Nasi Kuning, hingga Tumpeng Komplit</strong> untuk berbagai kebutuhan acara kantor, syukuran, atau harian Anda.</p>
+                <ul>
+                    <li><i class="fas fa-check"></i> Spesialis Masakan Betawi, Sunda, Jawa & Padang</li>
+                    <li><i class="fas fa-check"></i> Pesanan Nasi Box & Tumpeng Komplit</li>
+                    <li><i class="fas fa-check"></i> Higienis & Halal Terjamin</li>
                 </ul>
-                <a href="https://wa.me/6281381228890" class="btn btn-primary">Kenal Lebih Dekat</a>
+                <a href="https://wa.me/6281381228890" class="btn btn-primary"><i class="fas fa-heart"></i> Kenal Lebih Dekat</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Order Section -->
+    <section id="cara-pesan" class="section">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>Cara Pemesanan</h2>
+                <p>Pesan catering dari Dapoer Niknik semudah 4 langkah. Tanpa ribet!</p>
+            </div>
+            <div class="steps-grid stagger-children">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-icon"><i class="fab fa-whatsapp"></i></div>
+                    <h3>Hubungi Kami</h3>
+                    <p>Chat via WhatsApp atau isi form di website. Sampaikan jenis acara dan jumlah tamu.</p>
+                </div>
+                <div class="step-connector"><i class="fas fa-chevron-right"></i></div>
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-icon"><i class="fas fa-clipboard-list"></i></div>
+                    <h3>Pilih Menu</h3>
+                    <p>Konsultasi dan pilih menu sesuai selera. Bisa custom sesuai budget dan tema acara Anda.</p>
+                </div>
+                <div class="step-connector"><i class="fas fa-chevron-right"></i></div>
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-icon"><i class="fas fa-credit-card"></i></div>
+                    <h3>DP 50%</h3>
+                    <p>Konfirmasi pesanan dengan DP 50%. Pelunasan bisa dilakukan maksimal H-1 acara.</p>
+                </div>
+                <div class="step-connector"><i class="fas fa-chevron-right"></i></div>
+                <div class="step-item">
+                    <div class="step-number">4</div>
+                    <div class="step-icon"><i class="fas fa-truck"></i></div>
+                    <h3>Siap Diantar!</h3>
+                    <p>Pesanan datang tepat waktu di lokasi Anda. Tinggal duduk manis dan nikmati acaranya!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Layanan Acara Section -->
+    <section id="layanan-acara" class="section">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2>Momen yang Kami Layani</h2>
+                <p>Dari rapat kantor hingga pesta pernikahan, kami siap menemani setiap momen penting Anda.</p>
+            </div>
+            <div class="event-grid stagger-children">
+                <div class="event-card">
+                    <div class="event-img">
+                        <img src="assets/images/event_kantor.png" alt="Catering Kantor Jakarta" loading="lazy">
+                        <div class="event-overlay">
+                            <span class="event-tag">Populer</span>
+                        </div>
+                    </div>
+                    <div class="event-info">
+                        <h3>Rapat & Meeting</h3>
+                        <p>Nasi box premium untuk meeting, training, dan seminar kantor.</p>
+                        <a href="https://wa.me/6281381228890?text=Halo%20Dapoer%20Niknik,%20saya%20ingin%20pesan%20catering%20kantor" class="event-link">Pesan untuk Kantor <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="event-card">
+                    <div class="event-img">
+                        <img src="assets/images/event_wedding.png" alt="Catering Pernikahan Jakarta" loading="lazy">
+                        <div class="event-overlay">
+                            <span class="event-tag">Premium</span>
+                        </div>
+                    </div>
+                    <div class="event-info">
+                        <h3>Pernikahan & Resepsi</h3>
+                        <p>Prasmanan lengkap dan megah untuk hari bahagia Anda.</p>
+                        <a href="https://wa.me/6281381228890?text=Halo%20Dapoer%20Niknik,%20saya%20ingin%20pesan%20catering%20pernikahan" class="event-link">Pesan untuk Wedding <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="event-card">
+                    <div class="event-img">
+                        <img src="assets/images/event_syukuran.png" alt="Catering Syukuran Jakarta" loading="lazy">
+                    </div>
+                    <div class="event-info">
+                        <h3>Syukuran & Arisan</h3>
+                        <p>Tumpeng modern dan nasi kuning komplit untuk momen bersyukur.</p>
+                        <a href="https://wa.me/6281381228890?text=Halo%20Dapoer%20Niknik,%20saya%20ingin%20pesan%20catering%20syukuran" class="event-link">Pesan untuk Syukuran <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="event-card">
+                    <div class="event-img">
+                        <img src="assets/images/event_harian.png" alt="Catering Harian Jakarta" loading="lazy">
+                    </div>
+                    <div class="event-info">
+                        <h3>Catering Harian</h3>
+                        <p>Langganan makan siang harian untuk kantor & keluarga.</p>
+                        <a href="https://wa.me/6281381228890?text=Halo%20Dapoer%20Niknik,%20saya%20ingin%20pesan%20catering%20harian" class="event-link">Pesan Harian <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Testimonials Section -->
-    <section id="testimonials" class="section" style="background: var(--off-white); padding: 5rem 0;">
+    <section id="testimonials" class="section">
         <div class="container">
-            <div class="section-title">
+            <div class="section-title reveal">
                 <h2>Apa Kata Pelanggan Kami?</h2>
                 <p>Kepuasan pelanggan adalah prioritas utama kami di Dapoer Niknik Jakarta.</p>
             </div>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem;">
-                <div class="feature-item" style="background: white; padding: 2.5rem; text-align: left; border-radius: 20px; box-shadow: var(--shadow);">
-                    <div style="color: var(--primary); margin-bottom: 1rem;">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                    </div>
-                    <p style="font-style: italic; margin-bottom: 1.5rem; color: var(--secondary); line-height: 1.6;">"Nasi box premiumnya sangat memuaskan. Lauknya porsinya pas, rasanya Betawi banget, dan yang paling penting pengirimannya tepat waktu ke kantor di Kuningan."</p>
-                    <div style="display: flex; align-items: center; gap: 1rem;">
-                        <div style="width: 45px; height: 45px; border-radius: 50%; background: var(--primary); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">S</div>
-                        <div>
-                            <h4 style="margin: 0; font-size: 1rem;">Ibu Sarah</h4>
-                            <p style="margin: 0; font-size: 0.8rem; color: var(--gray);">Karyawan Swasta, Jakarta</p>
-                        </div>
+        </div>
+        <!-- Auto-scroll carousel (full width) -->
+        <div class="testimonial-carousel-wrapper">
+            <div class="testimonial-track" id="testimonialTrack">
+                <!-- Card 1 -->
+                <div class="testimonial-card">
+                    <div class="testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p>"Nasi box premiumnya sangat memuaskan. Lauknya porsinya pas, rasanya Betawi banget, dan pengirimannya tepat waktu ke kantor."</p>
+                    <div class="testi-author">
+                        <div class="testi-avatar">S</div>
+                        <div><h4>Ibu Sarah</h4><span>Karyawan Swasta, Jakarta</span></div>
                     </div>
                 </div>
-                <div class="feature-item" style="background: white; padding: 2.5rem; text-align: left; border-radius: 20px; box-shadow: var(--shadow);">
-                    <div style="color: var(--primary); margin-bottom: 1rem;">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                <!-- Card 2 -->
+                <div class="testimonial-card">
+                    <div class="testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p>"Tumpeng modernnya jadi bintang tamu di syukuran rumah. Penampilannya cantik, rasanya #RASANYANGANGENIN!"</p>
+                    <div class="testi-author">
+                        <div class="testi-avatar">B</div>
+                        <div><h4>Bapak Budi</h4><span>Warga Jakarta Selatan</span></div>
                     </div>
-                    <p style="font-style: italic; margin-bottom: 1.5rem; color: var(--secondary); line-height: 1.6;">"Tumpeng modern dari Dapoer Niknik jadi bintang tamu di acara syukuran rumah kami. Penampilannya cantik sekali, rasanya benar-benar #RASANYANGANGENIN!"</p>
-                    <div style="display: flex; align-items: center; gap: 1rem;">
-                        <div style="width: 45px; height: 45px; border-radius: 50%; background: var(--primary); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">B</div>
-                        <div>
-                            <h4 style="margin: 0; font-size: 1rem;">Bapak Budi</h4>
-                            <p style="margin: 0; font-size: 0.8rem; color: var(--gray);">Warga Jakarta Selatan</p>
-                        </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="testimonial-card">
+                    <div class="testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p>"Sudah 3x pesan prasmanan buat acara kantor, selalu puas! Karyawan pada suka banget sama soto Betawi-nya."</p>
+                    <div class="testi-author">
+                        <div class="testi-avatar">R</div>
+                        <div><h4>Pak Rudi</h4><span>Manager HRD, Sudirman</span></div>
+                    </div>
+                </div>
+                <!-- Card 4 -->
+                <div class="testimonial-card">
+                    <div class="testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p>"Mie kangkung bakso-nya juara! Kuahnya kental, porsinya mantap. Cocok buat makan siang di kantor."</p>
+                    <div class="testi-author">
+                        <div class="testi-avatar">D</div>
+                        <div><h4>Dina Putri</h4><span>Karyawan Startup, Kemang</span></div>
+                    </div>
+                </div>
+                <!-- Card 5 -->
+                <div class="testimonial-card">
+                    <div class="testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p>"Nasi kuning komplit-nya enak banget, wangi rempahnya kerasa. Anak-anak di rumah juga suka semua!"</p>
+                    <div class="testi-author">
+                        <div class="testi-avatar">A</div>
+                        <div><h4>Ibu Anita</h4><span>Ibu Rumah Tangga, Depok</span></div>
+                    </div>
+                </div>
+                <!-- Card 6 -->
+                <div class="testimonial-card">
+                    <div class="testi-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p>"Order empal gentong buat acara arisan, semua tetangga nanya pesan dimana. Pasti repeat order lagi!"</p>
+                    <div class="testi-author">
+                        <div class="testi-avatar">M</div>
+                        <div><h4>Ibu Maya</h4><span>Warga Bekasi Barat</span></div>
                     </div>
                 </div>
             </div>
@@ -471,52 +615,101 @@
     </section>
 
     <!-- FAQ Section -->
-    <section id="faq" class="section" style="padding: 5rem 0;">
+    <section id="faq" class="section">
         <div class="container">
-            <div class="section-title">
-                <h2>Pertanyaan Sering Diajukan (FAQ)</h2>
+            <div class="section-title reveal">
+                <h2>Pertanyaan Sering Diajukan</h2>
                 <p>Informasi lengkap seputar layanan catering kami untuk wilayah Jakarta.</p>
             </div>
-            <div style="max-width: 850px; margin: 3rem auto 0; display: flex; flex-direction: column; gap: 1.5rem;">
-                <div style="background: var(--off-white); padding: 1.8rem; border-radius: 15px; border-left: 5px solid var(--primary);">
-                    <h4 style="margin-bottom: 0.8rem; color: var(--secondary); font-size: 1.1rem;">Berapa minimal pemesanan untuk Nasi Box?</h4>
-                    <p style="color: var(--gray); font-size: 0.95rem; line-height: 1.5;">Untuk menjaga kualitas dan efisiensi, minimal pemesanan Nasi Box adalah mulai dari 15 box per satu kali pengiriman.</p>
+            <div class="faq-list reveal" style="max-width: 800px; margin: 0 auto;">
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Berapa minimal pemesanan untuk Nasi Box?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Untuk menjaga kualitas dan efisiensi, minimal pemesanan Nasi Box adalah mulai dari 15 box per satu kali pengiriman.</p>
+                    </div>
                 </div>
-                <div style="background: var(--off-white); padding: 1.8rem; border-radius: 15px; border-left: 5px solid var(--primary);">
-                    <h4 style="margin-bottom: 0.8rem; color: var(--secondary); font-size: 1.1rem;">Apakah melayani pesanan di luar wilayah Jakarta?</h4>
-                    <p style="color: var(--gray); font-size: 0.95rem; line-height: 1.5;">Saat ini kami melayani area Jakarta dan sekitarnya (Jabodetabek). Untuk area di luar itu, silakan konsultasi terlebih dahulu melalui WhatsApp.</p>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Apakah melayani pesanan di luar wilayah Jakarta?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Saat ini kami melayani area Jakarta dan sekitarnya (Jabodetabek). Untuk area di luar itu, silakan konsultasi terlebih dahulu melalui WhatsApp.</p>
+                    </div>
                 </div>
-                <div style="background: var(--off-white); padding: 1.8rem; border-radius: 15px; border-left: 5px solid var(--primary);">
-                    <h4 style="margin-bottom: 0.8rem; color: var(--secondary); font-size: 1.1rem;">Bagaimana sistem pembayaran di Dapoer Niknik?</h4>
-                    <p style="color: var(--gray); font-size: 0.95rem; line-height: 1.5;">Kami menerapkan sistem DP sebesar 50% untuk konfirmasi pesanan, dan pelunasan dilakukan maksimal H-1 sebelum waktu pengiriman.</p>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Bagaimana sistem pembayaran di Dapoer Niknik?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Kami menerapkan sistem DP sebesar 50% untuk konfirmasi pesanan, dan pelunasan dilakukan maksimal H-1 sebelum waktu pengiriman.</p>
+                    </div>
                 </div>
-                <div style="background: var(--off-white); padding: 1.8rem; border-radius: 15px; border-left: 5px solid var(--primary);">
-                    <h4 style="margin-bottom: 0.8rem; color: var(--secondary); font-size: 1.1rem;">Apakah bisa request menu khusus (Custom Menu)?</h4>
-                    <p style="color: var(--gray); font-size: 0.95rem; line-height: 1.5;">Sangat bisa! Kami menerima penyesuaian menu baik untuk masakan Betawi, Jawa, Sunda, maupun Padang sesuai dengan selera dan kebutuhan budget Anda.</p>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Apakah bisa request menu khusus (Custom Menu)?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Sangat bisa! Kami menerima penyesuaian menu baik untuk masakan Betawi, Jawa, Sunda, maupun Padang sesuai dengan selera dan kebutuhan budget Anda.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Berapa lama waktu yang dibutuhkan untuk memesan?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Kami menyarankan pemesanan minimal H-2 sebelum acara. Untuk acara besar seperti prasmanan atau tumpeng, sebaiknya pesan minimal H-7 agar persiapan lebih matang.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- CTA Banner -->
+    <section id="cta-banner" class="cta-banner">
+        <div class="container">
+            <div class="cta-content reveal">
+                <div class="cta-badge">🔥 Promo Spesial</div>
+                <h2>Siap Merayakan Momen Spesial Anda?</h2>
+                <p>Konsultasi gratis dan dapatkan penawaran terbaik untuk acara Anda. Hubungi kami sekarang via WhatsApp!</p>
+                <div class="cta-btns">
+                    <a href="https://wa.me/6281381228890?text=Halo%20Dapoer%20Niknik,%20saya%20ingin%20konsultasi%20catering%20untuk%20acara%20saya" class="btn btn-primary btn-lg" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Chat Sekarang
+                    </a>
+                    <a href="tel:+6281381228890" class="btn btn-outline-white btn-lg">
+                        <i class="fas fa-phone"></i> Telepon Langsung
+                    </a>
+                </div>
+                <center>
+                    <p class="cta-note"><i class="fas fa-clock"></i> Respon cepat, biasa dibalas dalam 5 menit!</p>
+                </center>
+            </div>
+        </div>
+    </section>
     <section id="contact" class="section">
         <div class="container">
-            <div class="section-title">
+            <div class="section-title reveal">
                 <h2>Hubungi Kami</h2>
                 <p>Punya pertanyaan atau ingin konsultasi menu masakan? Kami siap membantu mewujudkan hidangan impian Anda.</p>
             </div>
             <div class="contact-grid">
                 <!-- Contact Information Area -->
-                <div class="contact-info-card">
-                    <h3 style="margin-bottom: 2rem; color: var(--secondary);">Informasi Kontak</h3>
+                <div class="contact-info-card reveal">
+                    <h3>Informasi Kontak</h3>
                     
                     <div class="contact-item-box">
                         <div class="contact-icon">
                             <i class="fas fa-map-marker-alt"></i>
                         </div>
                         <div>
-                            <h4 style="margin-bottom: 0.3rem;">Lokasi</h4>
-                            <p style="color: var(--gray); font-size: 0.9rem;">Gudang Sarinah Ecosystem, Jakarta</p>
+                            <h4>Lokasi</h4>
+                            <p>Gudang Sarinah Ecosystem, Jakarta</p>
                         </div>
                     </div>
 
@@ -525,8 +718,8 @@
                             <i class="fas fa-phone"></i>
                         </div>
                         <div>
-                            <h4 style="margin-bottom: 0.3rem;">Telepon / WA</h4>
-                            <p style="color: var(--gray); font-size: 0.9rem;">+62 813-8122-8890</p>
+                            <h4>Telepon / WA</h4>
+                            <p>+62 813-8122-8890</p>
                         </div>
                     </div>
 
@@ -535,8 +728,8 @@
                             <i class="fas fa-envelope"></i>
                         </div>
                         <div>
-                            <h4 style="margin-bottom: 0.3rem;">Email</h4>
-                            <p style="color: var(--gray); font-size: 0.9rem;">dapoerniknik@gmail.com</p>
+                            <h4>Email</h4>
+                            <p>dapoerniknik@gmail.com</p>
                         </div>
                     </div>
 
@@ -545,23 +738,23 @@
                             <i class="fas fa-clock"></i>
                         </div>
                         <div>
-                            <h4 style="margin-bottom: 0.3rem;">Jam Operasional</h4>
-                            <p style="color: var(--gray); font-size: 0.9rem;">Senin - Sabtu: 08:00 - 20:00 WIB<br>Minggu: Berdasarkan Pesanan</p>
+                            <h4>Jam Operasional</h4>
+                            <p>Senin - Sabtu: 08:00 - 20:00 WIB<br>Minggu: Berdasarkan Pesanan</p>
                         </div>
                     </div>
 
-                    <div style="margin-top: 3rem;">
-                        <h4 style="margin-bottom: 1rem;">Social Media</h4>
-                        <div style="display: flex; gap: 1rem;">
-                            <a href="#" style="width: 40px; height: 40px; border-radius: 50%; background: var(--off-white); display: flex; align-items: center; justify-content: center; color: var(--secondary); transition: var(--transition);"><i class="fab fa-instagram"></i></a>
-                            <a href="#" style="width: 40px; height: 40px; border-radius: 50%; background: var(--off-white); display: flex; align-items: center; justify-content: center; color: var(--secondary); transition: var(--transition);"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" style="width: 40px; height: 40px; border-radius: 50%; background: var(--off-white); display: flex; align-items: center; justify-content: center; color: var(--secondary); transition: var(--transition);"><i class="fab fa-tiktok"></i></a>
+                    <div style="margin-top: 2rem;">
+                        <h4 style="margin-bottom: 0.75rem; font-size: 0.9rem; color: var(--white);">Ikuti Kami</h4>
+                        <div style="display: flex; gap: 0.75rem;">
+                            <a href="#" style="width: 38px; height: 38px; border-radius: 10px; background: var(--surface); display: flex; align-items: center; justify-content: center; color: var(--dark-gray); font-size: 0.95rem;"><i class="fab fa-instagram"></i></a>
+                            <a href="#" style="width: 38px; height: 38px; border-radius: 10px; background: var(--surface); display: flex; align-items: center; justify-content: center; color: var(--dark-gray); font-size: 0.95rem;"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" style="width: 38px; height: 38px; border-radius: 10px; background: var(--surface); display: flex; align-items: center; justify-content: center; color: var(--dark-gray); font-size: 0.95rem;"><i class="fab fa-tiktok"></i></a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Contact Form Area -->
-                <div class="contact-form-card">
+                <div class="contact-form-card reveal">
                     <form id="contactForm" onsubmit="handleContactSubmit(event)">
                         <div class="form-group">
                             <label for="form-name">Nama Lengkap</label>
@@ -585,7 +778,7 @@
                             <label for="form-message">Pesan Khusus</label>
                             <textarea id="form-message" rows="4" placeholder="Tuliskan detail pesanan atau pertanyaan Anda..."></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1.2rem;">Kirim ke WhatsApp</button>
+                        <button type="submit" class="btn btn-primary"><i class="fab fa-whatsapp"></i> Kirim ke WhatsApp</button>
                     </form>
                 </div>
             </div>
@@ -593,19 +786,19 @@
     </section>
 
     <!-- Footer -->
-    <footer style="background: var(--secondary); color: var(--white); padding: 5rem 0 2rem;">
+    <footer>
         <div class="container">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 4rem; margin-bottom: 4rem;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; margin-bottom: 3rem;">
                 <div>
-                    <a href="#" class="logo" style="color: var(--white); margin-bottom: 0.5rem;">
-                         <i class="fas fa-utensils" style="color: var(--primary);"></i> Dapoer <span style="color: var(--primary);">Niknik</span>
+                    <a href="#" class="logo" style="color: var(--white); margin-bottom: 0.75rem;">
+                         <i class="fas fa-utensils"></i> Dapoer <span>Niknik</span>
                     </a>
-                    <p style="color: var(--primary); font-weight: 700; font-size: 0.8rem; margin-bottom: 1rem; letter-spacing: 1px;">#RASANYANGANGENIN</p>
-                    <p style="color: #A0A0A0; font-size: 0.9rem;">Catering UMKM pilihan keluarga Indonesia. Lezat, Higienis, dan Terjangkau.</p>
+                    <p style="color: var(--primary); font-weight: 700; font-size: 0.75rem; margin-bottom: 1rem; letter-spacing: 2px;">#RASANYANGANGENIN</p>
+                    <p style="color: rgba(255,255,255,0.45); font-size: 0.88rem; line-height: 1.6;">Catering UMKM pilihan keluarga Indonesia. Lezat, Higienis, dan Terjangkau.</p>
                 </div>
                 <div>
-                    <h4 style="margin-bottom: 1.5rem; font-family: 'Playfair Display';">Navigasi</h4>
-                    <ul style="color: #A0A0A0; font-size: 0.9rem; display: flex; flex-direction: column; gap: 0.7rem;">
+                    <h4>Navigasi</h4>
+                    <ul>
                         <li><a href="#hero">Beranda</a></li>
                         <li><a href="#menu">Menu</a></li>
                         <li><a href="#why-us">Keunggulan</a></li>
@@ -613,16 +806,16 @@
                     </ul>
                 </div>
                 <div>
-                    <h4 style="margin-bottom: 1.5rem; font-family: 'Playfair Display';">Kontak</h4>
-                    <ul style="color: #A0A0A0; font-size: 0.9rem; display: flex; flex-direction: column; gap: 0.7rem;">
-                        <li><i class="fas fa-map-marker-alt" style="margin-right: 0.5rem;"></i> Gudang Sarinah Ecosystem, Jakarta</li>
-                        <li><i class="fas fa-phone" style="margin-right: 0.5rem;"></i> +62 813-8122-8890</li>
-                        <li><i class="fas fa-envelope" style="margin-right: 0.5rem;"></i> dapoerniknik@gmail.com</li>
+                    <h4>Kontak</h4>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt" style="margin-right: 0.5rem; opacity: 0.5;"></i> Gudang Sarinah Ecosystem, Jakarta</li>
+                        <li><i class="fas fa-phone" style="margin-right: 0.5rem; opacity: 0.5;"></i> +62 813-8122-8890</li>
+                        <li><i class="fas fa-envelope" style="margin-right: 0.5rem; opacity: 0.5;"></i> dapoerniknik@gmail.com</li>
                     </ul>
                 </div>
             </div>
-            <div style="border-top: 1px solid #404040; padding-top: 2rem; text-align: center; color: #707070; font-size: 0.8rem;">
-                <p>&copy; 2024 Dapoer Niknik Catering. All Rights Reserved.</p>
+            <div style="border-top: 1px solid rgba(255,255,255,0.08); padding-top: 1.5rem; text-align: center;">
+                <p style="color: rgba(255,255,255,0.3); font-size: 0.8rem;">&copy; 2024 Dapoer Niknik Catering. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
